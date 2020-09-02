@@ -53,18 +53,24 @@ console.log(questions);
   return (
     <div className="App">
       <h1>Welcome to QuizNo</h1>
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+
       <button className="start" onClick={startTrivia}>Start</button>
-      <p className="score">Score:</p>
-      <p>Loading...</p>
-      {/* <QuestionCard 
+      ) : null}
+      {!gameOver ? <p className="score">Score:</p> : null}
+      {loading ? <p>Loading...</p> : null}
+      {!loading && !gameOver && (
+      <QuestionCard 
       questionNumber={number + 1}
       totalQuestions={TOTAL_QUESTIONS}
       question={questions[number].question}
       answers={questions[number].answers}
       userAnswer={userAnswers ? userAnswers[number] : undefined}
       callback={checkAnswer}
-      /> */}
-      <button className="next" onClick={nextQuestion}>Next Question</button>
+      
+      />
+      )}
+      {!gameOver && !loading && userAnswers.length === number +1 && number !== TOTAL_QUESTIONS - 1 ? (<button className="next" onClick={nextQuestion}>Next Question</button>) : null}
 
     </div>
   );
